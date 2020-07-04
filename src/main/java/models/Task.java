@@ -2,6 +2,7 @@ package models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Task {
 
@@ -19,6 +20,23 @@ public class Task {
         this.id = instances.size();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return completed == task.completed &&
+                id == task.id &&
+                description.equals(task.description) &&
+                createdAt.equals(task.createdAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, completed, createdAt, id);
+    }
+
+
     public String getDescription() {
         return description;
     }
@@ -33,6 +51,9 @@ public class Task {
 
     public boolean getCompleted(){
         return this.completed;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public LocalDateTime getCreatedAt() {
